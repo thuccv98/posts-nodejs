@@ -4,9 +4,9 @@ const router = express.Router();
 // Load model
 const Post = require('../models/Post');
 
-// Thu nghiem
-router.get('/', (req, res) => {
-  res.send('day la router post');
+// Hien thi form de tao post moi
+router.get('/add', (req, res) => {
+  res.render('posts/add');
 });
 
 module.exports = router;
