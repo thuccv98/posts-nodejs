@@ -2,6 +2,7 @@ const express = require('express');
 const connectDB = require('./config/db');
 const dotenv = require('dotenv');
 const handlebars = require('express-handlebars');
+// const bodyParser = require('body-parser');
 
 // import routes
 const posts = require('./routes/posts');
@@ -12,6 +13,14 @@ const app = express();
 // Khoi dong handlebars middleware
 app.engine('handlebars', handlebars());
 app.set('view engine', 'handlebars');
+
+// Khoi dong bodyParser middleware
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
+
+// phien ban express tu 4.16+ khong con su dung bodyparser nua, thay vao do la:
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // Su dung .env
 dotenv.config();
