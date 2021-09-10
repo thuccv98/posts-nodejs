@@ -3,6 +3,7 @@ const connectDB = require('./config/db');
 const dotenv = require('dotenv');
 const handlebars = require('express-handlebars');
 // const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
 // import routes
 const posts = require('./routes/posts');
@@ -19,8 +20,11 @@ app.set('view engine', 'handlebars');
 // app.use(bodyParser.json());
 
 // phien ban express tu 4.16+ khong con su dung bodyparser nua, thay vao do la:
-app.use(express.json());
+// app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Khoi dong methodOverride middleware
+app.use(methodOverride('_method'));
 
 // Su dung .env
 dotenv.config();

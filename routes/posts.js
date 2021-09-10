@@ -26,4 +26,23 @@ router.post('/', async (req, res) => {
   }
 });
 
+// Hien thi tat ca cac posts
+router.get('/', async (req, res) => {
+  const posts = await Post.find().lean().sort({ date: -1 });
+  res.render('posts/index', { posts: posts });
+});
+
+// Hien thi form de nguoi dung chinh sua post
+router.get('/edit/:id', async (req, res) => {
+  const post = await Post.findOne({ _id: req.params.id }).lean();
+  res.render('posts/edit', { post });
+});
+
+// Cap nhat thay doi post vao database
+router.put('/:id', async (req, res) => {
+  const { title, text } = req.body;
+  await Post.findOneAndUpdate({ _id: req.params.id }, { title, text });
+  res.redirect('/posts');
+});
+
 module.exports = router;
