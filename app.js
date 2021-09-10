@@ -2,6 +2,9 @@ const express = require('express');
 const connectDB = require('./config/db');
 const dotenv = require('dotenv');
 
+// import routes
+const posts = require('./routes/posts');
+
 // Khoi dong app
 const app = express();
 dotenv.config();
@@ -11,6 +14,9 @@ app.use(express.json());
 
 // Ket noi co so du lieu
 connectDB();
+
+// Mang routes vao de su dung
+app.use('/posts', posts);
 
 const PORT = 5000;
 
